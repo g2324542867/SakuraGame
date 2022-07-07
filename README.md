@@ -1,7 +1,7 @@
-# SakulaGame
+# SakuraGame
 
 #### 介绍
-工程项目，SakulaGame，Sakula游戏商城
+工程项目，SakuraGame，Sakura游戏商城
 
 #### 软件架构
 软件架构说明
