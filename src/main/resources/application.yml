@@ -1,0 +1,90 @@
+# -------------------- SpringBoot配置
+server:
+  port: 8088
+
+# -------------------- 自定义属性
+
+# --------------------
+
+# -------------------- 自定义上传文件夹
+upload:
+  location: D:/upload
+
+# -------------------- spring配置
+spring:
+# -------------------- jdbc配置
+  datasource:
+    url: jdbc:mysql:///mydb
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 20010419
+# -------------------- Redis配置
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 30000
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 5
+        min-idle: 1
+# -------------------- 静态资源配置
+  mvc:
+    static-path-pattern: /**
+  web:
+    resources:
+      static-locations: classpath:/public/, classpath:/static/, file:${upload.location}/
+      chain:
+        strategy:
+          content:
+            enabled: true # 内容版本管理策略会给静态文件添加随机hash值
+            paths: /**
+# -------------------- 文件上传配置
+  servlet:
+    multipart:
+      location: ./
+      max-file-size: 5MB
+      max-request-size: 10MB
+# -------------------- Thymeleaf模板引擎配置
+  thymeleaf:
+    cache: false # 缓存HTML模板，开发环境中必须使用false，部署环境使用true
+# -------------------- Spring Security认证配置
+  security:
+    user:
+      name: admin
+      password: 123456
+      roles: admin, user
+## -------------------- JPA配置
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#      naming:
+#        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+#        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+#    show-sql: true
+#    generate-ddl: true
+#
+## -------------------- Mybatis配置
+#mybatis:
+#  mapper-locations: classpath:mappers/*.xml
+
+# -------------------- Mybatis-plus的配置
+mybatis-plus:
+  mapper-locations: classpath:mappers/*.xml
+  type-aliases-package: com.zking.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+# -------------------- 分页配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  auto-dialect: true
+
+# -------------------- Log日志配置
+logging:
+  level:
+    root: info
+    com.zking: debug
+  file.path: .
+  file.name: target\log.log
