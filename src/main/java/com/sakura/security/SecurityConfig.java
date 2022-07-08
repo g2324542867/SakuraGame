@@ -18,7 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig
 {
-    // @Bean
+    @Bean
     public PasswordEncoder encoder()
     {
         return new BCryptPasswordEncoder();
@@ -32,7 +32,7 @@ public class SecurityConfig
                    .antMatchers("/images/**", "/css/**", "/js/**", "/fonts/**", "/favicon.*");
     }
     
-    // @Bean
+     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
     {
         http.formLogin()
@@ -43,7 +43,9 @@ public class SecurityConfig
         http.logout()
             .logoutUrl("/logout")
             .logoutSuccessUrl("/login.html?logout");
+
         http.exceptionHandling().accessDeniedPage("/403.html");
+
         return http.build();
     }
 }

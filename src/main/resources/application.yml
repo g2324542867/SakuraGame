@@ -1,6 +1,6 @@
 # -------------------- SpringBoot配置
 server:
-  port: 8088
+  port: 8080
 
 # -------------------- 自定义属性
 
@@ -14,7 +14,7 @@ upload:
 spring:
 # -------------------- jdbc配置
   datasource:
-    url: jdbc:mysql:///mydb
+    url: jdbc:mysql://17o3284a83.zicp.fun:10651/sakura
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 20010419
