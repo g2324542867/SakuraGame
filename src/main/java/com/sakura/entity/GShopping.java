@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @TableName("g_shopping")
 @AllArgsConstructor
@@ -17,7 +19,7 @@ public class GShopping {
     private String gName;
     private Double gPrice;
     private String gMakers;
-    private String gDate;
+    private Date gDate;
     private Integer gRank;
     private String gIntro;
     private String gImgUrl;
