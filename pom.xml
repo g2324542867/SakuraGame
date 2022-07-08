@@ -31,11 +31,11 @@
             <version>2.1.4</version>
         </dependency>-->
         <!--mybatis-plus依赖-->
-        <!--<dependency>
+        <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.5.2</version>
-        </dependency>-->
+        </dependency>
         <!--分页插件依赖-->
         <!--<dependency>
             <groupId>com.github.pagehelper</groupId>
