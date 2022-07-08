@@ -1,5 +1,6 @@
 package com.sakura.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -17,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 public class User implements UserDetails {
 
-    @TableId("user_id")
+    @TableId(type = IdType.AUTO)
     private Integer userId; // 用户id
     private String userName; // 用户名
     @TableField(value = "user_pass")
