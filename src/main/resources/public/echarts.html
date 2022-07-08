@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      button {
+          display: block;
+          width: 100%;
+          padding: 0.5rem 0;
+          border-radius: 4px;
+          border: 1px solid blue;
+          background-color: #86b7fe;
+          color: white;
+      }
+      .div {
+          padding: 2rem;
+      }
+  </style>
+</head>
+<body>
+<div id="app">
+  <h1>Vue使用ECharts</h1>
+  <div>
+    <div id="chart1" style="width: 600px;height:400px;"></div>
+    <div class="div"><button @click="click(1)">直接修改数据</button></div>
+    <div id="chart2" style="width: 600px;height:400px;"></div>
+    <div class="div"><button @click="click(2)">修改整条数据</button></div>
+    <div id="chart3" style="width: 600px;height:400px;"></div>
+    <div class="div"><button @click="click(3)">切换类型</button></div>
+  </div>
+</div>
+
+<script src="/js/vue-2.6.14.min.js"></script>
+<script src="/js/echarts.min.js"></script>
+<script>
+
+  // 配置数据
+  const option1 = {
+    title: {
+      text: '你那感人的游戏时间',
+      left: 'center'
+    },
+    xAxis: {
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        data: [120, {value: 200, itemStyle: {color: '#a90000'}}, 150, 80, 70, 110, 130],
+        type: 'bar'
+      }
+    ]
+  };
+
+  const option2 = {
+    title: {
+      text: '薪水'
+    },
+    tooltip: {
+      trigger: 'axis'
+    },
+    legend: {
+      data: ['Email', 'Union Ads', '别人的', 'Direct', '你的']
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    toolbox: {
+      feature: {
+        saveAsImage: {}
+      }
+    },
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        name: 'Email',
+        type: 'line',
+        stack: 'Total',
+        data: [120, 132, 101, 134, 90, 230, 210]
+      },
+      {
+        name: 'Union Ads',
+        type: 'line',
+        stack: 'Total',
+        data: [220, 182, 191, 234, 290, 330, 310]
+      },
+      {
+        name: '别人的',
+        type: 'line',
+        stack: 'Total',
+        data: [150, 232, 201, 154, 190, 330, 410]
+      },
+      {
+        name: 'Direct',
+        type: 'line',
+        stack: 'Total',
+        data: [320, 332, 301, 334, 390, 330, 320]
+      },
+      {
+        name: '你的',
+        type: 'line',
+        stack: 'Total',
+        data: [820, 932, 901, 934, 1290, 1330, 1520]
+      }
+    ]
+  };
+
+  const option3 = {
+    title: {
+      text: '你的网站访问数据',
+      subtext: '过于真实',
+      left: 'center'
+    },
+    tooltip: {
+      trigger: 'item'
+    },
+    legend: {
+      orient: 'vertical',
+      left: 'left'
+    },
+    series: [
+      {
+        name: 'Access From',
+        type: 'pie',
+        radius: '50%',
+        data: [
+          { value: 1048, name: 'Search Engine' },
+          { value: 735, name: 'Direct' },
+          { value: 580, name: 'Email' },
+          { value: 484, name: 'Union Ads' },
+          { value: 300, name: 'Video Ads' }
+        ],
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    ]
+  };
+
+  new Vue({
+    el: '#app',
+    data: {
+      text: '请输入你的想法……',
+      myChart1: null,
+      myChart2: null,
+      myChart3: null,
+      changed: false,
+    },
+    methods: {
+      click: function (id) {
+        // 修改数据
+        if (id === 1) {
+          // 修改单个数据
+          option1.series[0].data[0] += 120
+          this.myChart1.setOption(option1)
+        } else if (id === 2) {
+          // 直接修改整条数据
+          option2.series[4].data = [820, 932, 901, 1000, 300, 200, 100]
+          this.myChart2.setOption(option2)
+        } else if (id === 3) {
+          // 甚至修改类型
+          if (this.changed) {
+            this.myChart3.setOption(option3)
+          } else {
+            this.myChart3.setOption(option1)
+          }
+          this.changed = ! this.changed
+        }
+      },
+    },
+    mounted: function () {
+      this.myChart1 = echarts.init(document.getElementById('chart1'))
+      this.myChart1.setOption(option1)
+      this.myChart2 = echarts.init(document.getElementById('chart2'))
+      this.myChart2.setOption(option2)
+      this.myChart3 = echarts.init(document.getElementById('chart3'))
+      this.myChart3.setOption(option3)
+    },
+  });
+
+</script>
+</body>
+</html>
