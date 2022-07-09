@@ -2,83 +2,75 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>测试</title>
+    <title>登录页面</title>
+    <!--添加element-ui样式    -->
     <link th:href="@{/css/theme-chalk-2.15.7.css}" href="../static/css/theme-chalk-2.15.7.css" rel="stylesheet"/>
+    <!-- 添加Bootstrap和fontawesome的样式-->
+    <link th:href="@{/css/fontawesome-all.css}" href="../static/css/fontawesome-all.css" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap.css}" href="../static/css/bootstrap.css" rel="stylesheet"/>
 </head>
 <body>
-<el-form :model="dynamicValidateForm" ref="dynamicValidateForm" label-width="100px" class="demo-dynamic">
-    <el-form-item
-            prop="email"
-            label="邮箱"
-            :rules="[
-      { required: true, message: '请输入邮箱地址', trigger: 'blur' },
-      { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
-    ]"
-    >
-        <el-input v-model="dynamicValidateForm.email"></el-input>
-    </el-form-item>
-    <el-form-item
-            v-for="(domain, index) in dynamicValidateForm.domains"
-            :label="'域名' + index"
-            :key="domain.key"
-            :prop="'domains.' + index + '.value'"
-            :rules="{
-      required: true, message: '域名不能为空', trigger: 'blur'
-    }"
-    >
-        <el-input v-model="domain.value"></el-input><el-button @click.prevent="removeDomain(domain)">删除</el-button>
-    </el-form-item>
-    <el-form-item>
-        <el-button type="primary" @click="submitForm('dynamicValidateForm')">提交</el-button>
-        <el-button @click="addDomain">新增域名</el-button>
-        <el-button @click="resetForm('dynamicValidateForm')">重置</el-button>
-    </el-form-item>
-</el-form>
-<script>
-    export default {
-        data() {
-            return {
-                dynamicValidateForm: {
-                    domains: [{
-                        value: ''
-                    }],
-                    email: ''
-                }
-            };
-        },
-        methods: {
-            submitForm(formName) {
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        alert('submit!');
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
-            },
-            resetForm(formName) {
-                this.$refs[formName].resetFields();
-            },
-            removeDomain(item) {
-                var index = this.dynamicValidateForm.domains.indexOf(item)
-                if (index !== -1) {
-                    this.dynamicValidateForm.domains.splice(index, 1)
-                }
-            },
-            addDomain() {
-                this.dynamicValidateForm.domains.push({
-                    value: '',
-                    key: Date.now()
-                });
-            }
-        }
-    }
-</script>
+<div id="app">
+    <el-row>
+        <div class="common-layout">
+            <el-container>
+                <el-header>
+                    这里是页首
+                </el-header>
+                <el-col :span="8" :offset="8">
+                    <el-main>
+                        <el-card class="box-card" shadow="hover">
+                            <div slot="header" class="clearfix" style="text-align: center;">
+                                <span style="font-size: 20px;">用户登录</span>
+                            </div>
+                            <div class="text item">
+                                <el-col :span="16" :offset="4">
+                                    <form action="/login" method="post"
+                                          enctype="multipart/form-data">
+                                        <span th:text="返回信息${info}"></span>
+                                        <div class="form-floating mb-3">
+                                            <input type="username" class="form-control" id="username" name="username" placeholder="请输入您的账号">
+                                            <label for="username">账号：</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="请输入您的密码">
+                                            <label for="password">密码：</label>
+                                        </div>
+                                        <div class="checkbox mb-3">
+                                            <label>
+                                                <input type="checkbox" value="remember-me"> 记住密码
+                                            </label>
+                                        </div>
+                                        <button class="w-100 btn btn-lg btn-primary" type="submit">登录</button>
+                                        <hr class="my-4">
+                                        <small class="text-muted">没有账号?<a
+                                                href="${pageContext.servletContext.contextPath}/register">请点击我进行用户注册</a></small>
+                                        <hr class="my-4">
+                                    </form>
+                                </el-col>
+                            </div>
+                        </el-card>
+                    </el-main>
+                </el-col>
+                <el-footer>这里是脚注</el-footer>
+            </el-container>
+        </div>
+    </el-row>
+</div>
+<!--js脚本-->
 <script th:src="@{/js/vue-2.6.14.min.js}" src="../static/js/vue-2.6.14.min.js"></script>
 <script th:src="@{/js/vue-router.js}" src="../static/js/vue-router.js"></script>
 <script th:src="@{/js/axios-0.26.js}" src="../static/js/axios-0.26.js"></script>
 <script th:src="@{/js/element-ui-2.15.7.js}" src="../static/js/element-ui-2.15.7.js"></script>
+<!--添加boostrap和jquery的脚本-->
+<script th:src="@{/js/jquery-3.6.0.js}" src="../static/js/jquery-3.6.0.js"></script>
+<script th:src="@{/js/fontawesome.js}" src="../static/js/fontawesome.js"></script>
+<script>
+    var Main = {
 
+    }
+    var Ctor = Vue.extend(Main)
+    new Ctor().$mount('#app')
+</script>
 </body>
 </html>
