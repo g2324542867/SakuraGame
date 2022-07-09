@@ -24,7 +24,7 @@ public class SecurityConfig
         return new BCryptPasswordEncoder();
     }
     
-    @Bean
+//    @Bean
     public WebSecurityCustomizer customizer()
     {
         return web ->

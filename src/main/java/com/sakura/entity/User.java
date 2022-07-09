@@ -26,6 +26,7 @@ public class User implements UserDetails {
     private String password;//用户密码
     private String userEmail;//邮箱
     private String userPhone; // 电话
+    private String userSex; // 性别
     private Date userBirth;//出生年月(生日)
     private String userQq;//qq 第三方授权登录 凭证
     private String userGitee;//gitee 第三方授权登录 凭证

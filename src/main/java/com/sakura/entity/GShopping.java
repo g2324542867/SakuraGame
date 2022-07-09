@@ -1,5 +1,6 @@
 package com.sakura.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GShopping {
-    @TableId("g_id")
+    @TableId(type = IdType.AUTO)
     private Integer gId;
     private Integer gTypeId;
     private String gName;

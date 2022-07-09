@@ -24,6 +24,11 @@
             <button type="submit">点击登出</button>
         </form>
     </h3>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        选择图片:<input type="file" name="file" /> <br>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"><br/>
+        <input type="submit" value="立刻上传">
+    </form>
 
     <div>
         <p>用户信息：<span th:text="${#session?.getAttribute('SPRING_SECURITY_CONTEXT')}"></span></p>
