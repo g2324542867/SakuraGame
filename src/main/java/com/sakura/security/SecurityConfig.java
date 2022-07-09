@@ -18,7 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig
 {
-    @Bean
+     @Bean
     public PasswordEncoder encoder()
     {
         return new BCryptPasswordEncoder();
@@ -43,9 +43,7 @@ public class SecurityConfig
         http.logout()
             .logoutUrl("/logout")
             .logoutSuccessUrl("/login.html?logout");
-
         http.exceptionHandling().accessDeniedPage("/403.html");
-
         return http.build();
     }
 }
